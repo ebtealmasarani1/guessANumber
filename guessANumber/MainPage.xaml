@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="guessANumber.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            <Label
+                Text="Gissa ett tal"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" />
+
+            <Image
+                Source="gissaetttal.jpg"
+                HeightRequest="185"
+                Aspect="AspectFit"
+                SemanticProperties.Description="dot net bot in a hovercraft number nine" />
+
+            <Label
+                x:Name="ShowRandomNumber"
+                Text="Välj vilken nivå du vill köra."
+                Style="{StaticResource SubHeadline}"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+
+            <Label
+                x:Name="GuessCountLabel"
+                Text="Antal gissningar: 0"
+                FontSize="16"
+                TextColor="DarkGray"
+                HorizontalOptions="Center" />
+            
+            <Picker 
+                x:Name="picker"
+                Title="Svårighets grad"
+                SelectedIndexChanged="OnPickerSelectedIndexChanged">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>1-20</x:String>
+                        <x:String>1-50</x:String>
+                        <x:String>1-100</x:String>
+                        <x:String>1-500</x:String>
+                        <x:String>1-1000</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Entry 
+                Placeholder="Skriv din gissning här"
+                x:Name="UserInput"/>
+
+            <Button
+                Text="Gissa är" 
+                x:Name="TheButton"
+                SemanticProperties.Hint="Take your guess to see if it's correct"
+                Clicked="ShowARandomNumberClicked"
+                HorizontalOptions="Center" FontAutoScalingEnabled="False" 
+                BackgroundColor="Green"/>
+
+
+            <Button 
+                HorizontalOptions="Center"
+                Text="Återställ"
+                Clicked="RestartGame"
+                BackgroundColor="Red"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

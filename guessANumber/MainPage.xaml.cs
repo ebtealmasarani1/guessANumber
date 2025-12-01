@@ -1,5 +1,4 @@
-﻿using Microsoft.Graphics.Canvas.Effects;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace guessANumber
 {
@@ -10,11 +9,14 @@ namespace guessANumber
         int guessCount = 0;
         int score = 0;
         int maxRange = 50;
+        int wins = 0;
 
 
         public MainPage()
         {
             InitializeComponent();
+            RestartGameButton.IsEnabled = false;
+
          }
 
         private void ShowARandomNumberClicked(object? sender, EventArgs e)
@@ -41,10 +43,19 @@ namespace guessANumber
 
                     scoreLabel.Text= $"Poäng: {score}";
 
+                    if (guessCount == 1)
+                    {
+                        wins++;
+                        winLabel.Text = $"Vinster: {wins}";
+                    }
+
                     ShowRandomNumber.Text= $"🎉 YAYY, du gissade rätt! Talet var {computerNumber}. Du klarade det på {guessCount} försök och fick {pointsEarned} poäng!";
-                    
-                    TheButton.IsEnabled = false;
+
+                    GuessButton.IsEnabled = false;
+                    RestartGameButton.IsEnabled = true;
+                    RestartGameButton.BackgroundColor = Color.FromRgb(0, 255 , 0);
                 }
+                
                 else if (computerNumber > userNumber)
                 {
                     ShowRandomNumber.Text = $"Nope, för litet.";
@@ -65,8 +76,10 @@ namespace guessANumber
             guessCount = 0;
             GuessCountLabel.Text = "Antal gissningar: 0";
             ShowRandomNumber.Text = "Ny omgång startad!";
-            TheButton.IsEnabled = true; 
+            GuessButton.IsEnabled = true;
+            RestartGameButton.IsEnabled = false;
             computerNumber = random.Next(1, maxRange + 1);
+            picker.IsEnabled= true;
         }
 
         void OnPickerSelectedIndexChanged(object sender, EventArgs e)
@@ -83,23 +96,28 @@ namespace guessANumber
                 if(selectedIndex == 0)
                 {
                     computerNumber = random.Next(1, 20);
+                    picker.IsEnabled = false;
                 }
                 else if (selectedIndex == 1)
                 {
                     computerNumber = random.Next(1, 50);
+                    picker.IsEnabled = false;
                 }
                 else if (selectedIndex == 2)
                 {
                     computerNumber = random.Next(1, 100);
+                    picker.IsEnabled = false;
                 }
                 else if (selectedIndex == 3)
                 {
                     computerNumber = random.Next(1, 500);
+                    picker.IsEnabled = false;
                 }
                 else if (selectedIndex == 4)
                 {
                     computerNumber = random.Next(1, 1000);
-                    //scoreLabel.Text = computerNumber.ToString();
+                    picker.IsEnabled = false;
+                    scoreLabel.Text = computerNumber.ToString();
                 }
             }
         }

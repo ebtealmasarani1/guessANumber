@@ -79,17 +79,18 @@
 
             <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
             <Button
-                Text="Gissa är" 
-                x:Name="TheButton"
+                Text="Gissa" 
+                x:Name="GuessButton"
                 SemanticProperties.Hint="Take your guess to see if it's correct"
                 Clicked="ShowARandomNumberClicked"
                 HorizontalOptions="Center" FontAutoScalingEnabled="False" 
                 BackgroundColor="Green"/>
 
 
-            <Button 
+            <Button
+                x:Name="RestartGameButton"
                 HorizontalOptions="Center"
-                Text="Återställ"
+                Text="Spela igen"
                 Clicked="RestartGame"
                 BackgroundColor="Red"/>
             </HorizontalStackLayout>

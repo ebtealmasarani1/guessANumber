@@ -8,10 +8,15 @@ namespace guessANumber
         static Random random = new Random();
         int computerNumber = 0;
         int guessCount = 0;
+        int score = 0;
+        int maxRange = 50;
+
         public MainPage()
         {
             InitializeComponent();
+            //computerNumber = random.Next(1, maxRange + 1);
         }
+
         private void ShowARandomNumberClicked(object? sender, EventArgs e)
         {
             if (int.TryParse(UserInput.Text, out int userNumber))
@@ -21,7 +26,23 @@ namespace guessANumber
 
                 if (computerNumber == userNumber)
                 {
-                    ShowRandomNumber.Text = $"🎉 YAYY, du gissade rätt: {computerNumber.ToString()}";
+                    int pointsEarned = 0;
+
+                    if (guessCount == 1)
+                        pointsEarned = 100;
+                    else if (guessCount <= 2)
+                        pointsEarned = 80;
+                    else if (guessCount <= 5)
+                        pointsEarned = 50;
+                    else if (guessCount <= 15)
+                        pointsEarned = 1;
+
+                    score = score + pointsEarned;
+
+                    scoreLabel.Text= $"Poäng: {score}";
+
+                    ShowRandomNumber.Text= $"🎉 YAYY, du gissade rätt! Talet var {computerNumber}. Du klarade det på {guessCount} försök och fick {pointsEarned} poäng!";
+                    
                     TheButton.IsEnabled = false;
                 }
                 else if (computerNumber > userNumber)
@@ -43,16 +64,14 @@ namespace guessANumber
         {
             guessCount = 0;
             GuessCountLabel.Text = "Antal gissningar: 0";
-            guessCount = 0;
-            ShowRandomNumber.Text = "Knappen fungerar, grattis!";
+            ShowRandomNumber.Text = "Ny omgång startad!";
             TheButton.IsEnabled = true; 
-            computerNumber = random.Next(1, 51);
+            computerNumber = random.Next(1, maxRange + 1);
         }
 
         void OnPickerSelectedIndexChanged(object sender, EventArgs e)
         {
             var picker = (Picker)sender;
-
 
             int selectedIndex = picker.SelectedIndex;
 
@@ -80,6 +99,7 @@ namespace guessANumber
                 else if (selectedIndex == 4)
                 {
                     computerNumber = random.Next(1, 1000);
+                    //scoreLabel.Text = computerNumber.ToString();
                 }
             }
         }

@@ -14,7 +14,7 @@
 
             <Image
                 Source="gissaetttal.jpg"
-                HeightRequest="185"
+                HeightRequest="150"
                 Aspect="AspectFit"
                 SemanticProperties.Description="dot net bot in a hovercraft number nine" />
 
@@ -31,7 +31,33 @@
                 FontSize="16"
                 TextColor="DarkGray"
                 HorizontalOptions="Center" />
-            
+
+            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                <Label 
+                x:Name="historyLabel"
+                Text="Resultattavla: "
+                FontSize="16"
+                FontAttributes="Bold"
+                TextColor="DarkBlue"
+                HorizontalOptions="End"/>
+
+                <Label 
+                x:Name="scoreLabel"
+                Text="Poäng: 0"
+                FontSize="16"
+                FontAttributes="Bold"
+                TextColor="DarkBlue"
+                HorizontalOptions="Start"/>
+
+                <Label 
+                x:Name="winLabel"
+                Text="Vinster: 0"
+                FontSize="16"
+                FontAttributes="Bold"
+                TextColor="DarkBlue"
+                HorizontalOptions="Center"/>
+            </HorizontalStackLayout>
+
             <Picker 
                 x:Name="picker"
                 Title="Svårighets grad"
@@ -51,6 +77,7 @@
                 Placeholder="Skriv din gissning här"
                 x:Name="UserInput"/>
 
+            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
             <Button
                 Text="Gissa är" 
                 x:Name="TheButton"
@@ -65,6 +92,7 @@
                 Text="Återställ"
                 Clicked="RestartGame"
                 BackgroundColor="Red"/>
+            </HorizontalStackLayout>
 
         </VerticalStackLayout>
     </ScrollView>

@@ -11,11 +11,11 @@ namespace guessANumber
         int score = 0;
         int maxRange = 50;
 
+
         public MainPage()
         {
             InitializeComponent();
-            //computerNumber = random.Next(1, maxRange + 1);
-        }
+         }
 
         private void ShowARandomNumberClicked(object? sender, EventArgs e)
         {
